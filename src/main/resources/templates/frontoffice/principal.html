@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head th:replace="~{index::head}">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <nav th:replace="~{index::menu}"></nav>
+      <main class="main">
+        <h1 th:text="${session.usuario}"></h1>
+        <h1 > Bienvenido al Dashboard</h1>
+        <button
+          type="button"
+          th:disabled="${not #authorization.expression('hasRole(''ADMIN'')')}"
+        >
+          Haz clic
+        </button>
+        Roles:
+        <span sec:authentication="principal.authorities"
+          >[ROLE_USER, ROLE_ADMIN]</span>
+      </main>
+  </body>
+</html>
